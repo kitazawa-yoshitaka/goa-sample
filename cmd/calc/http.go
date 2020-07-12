@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	calcapi "goa-sample"
 	calc "goa-sample/gen/calc"
 	calcsvr "goa-sample/gen/http/calc/server"
 	"log"
@@ -53,7 +54,7 @@ func handleHTTPServer(ctx context.Context, u *url.URL, calcEndpoints *calc.Endpo
 	)
 	{
 		eh := errorHandler(logger)
-		calcServer = calcsvr.New(calcEndpoints, mux, dec, enc, eh, nil)
+		calcServer = calcsvr.New(calcEndpoints, mux, dec, enc, eh, calcapi.NewMyErrorResponse)
 		if debug {
 			servers := goahttp.Servers{
 				calcServer,
